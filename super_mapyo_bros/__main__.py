@@ -25,19 +25,18 @@ def main() -> None:
 
     while True:
         for event in get():
-            if event.type == QUIT:
+            if event.type == KEYDOWN and event.key == K_ESCAPE:
                 break
 
-            if event.type == KEYDOWN and event.key == K_ESCAPE:
+            elif event.type == QUIT:
                 break
 
         tick(clock, level, camera)
         render(screen, level, camera)
-
         mario = level.getMario()
         
-        # if not mario is None and mario.isDead:
-        if not mario is None and (mario.y > screenSize[1] or mario.isDead):
+        # If not mario is None and mario.isDead:
+        if mario and mario.y > screenSize[1] or mario.isDead:
             print("Game Over")
             break
 

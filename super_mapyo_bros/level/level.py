@@ -30,7 +30,7 @@ class Level:
 
         # Add reusable items.
         self.entities.append(Coin(-100, 0, 10, 30, coinColor))
-        self.entities.append(Mushroom(-100, 100, tileWidth, tileWidth, mushroomColor))
+        self.entities.append(Mushroom(-100, 100, tileWidth, tileWidth, mushroomColor, self))
         #self.entities.append(Star(-100, 200, tileWidth, tileWidth, starColor))
         #self.entities.append(OneUp(-100, 300, tileWidth, tileWidth, oneUpColor))
         #self.entities.append(Flower(-100, 400, tileWidth, tileWidth, flowerColor))
@@ -52,10 +52,10 @@ class Level:
             self.map.append(BrickBlock(xPos, yPos, tileWidth, tileWidth, brickBrown))
 
         elif (tile == qCoinTile):
-            self.map.append(QuestionBlock(xPos, yPos, tileWidth, tileWidth, "coin", gold))
+            self.map.append(QuestionBlock(xPos, yPos, tileWidth, tileWidth, "coin", gold, self))
 
         elif (tile == qMushTile):
-            self.map.append(QuestionBlock(xPos, yPos, tileWidth, tileWidth, "mushroom", gold))
+            self.map.append(QuestionBlock(xPos, yPos, tileWidth, tileWidth, "mushroom", gold, self))
 
         elif (tile == pipeTile):
             self.map.append(Pipe(xPos, yPos, tileWidth, tileWidth, green))

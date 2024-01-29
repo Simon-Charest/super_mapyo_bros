@@ -1,3 +1,4 @@
+from super_mapyo_bros.mario.mario import Mario
 from super_mapyo_bros.state import State
 
 

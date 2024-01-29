@@ -17,4 +17,4 @@ class Coin (Entity):
 
     def draw(self, screen, camera) -> None:
         if self.active:
-            super().draw(self)
+            super().draw(screen, camera)

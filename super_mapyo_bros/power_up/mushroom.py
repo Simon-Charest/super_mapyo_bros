@@ -5,11 +5,11 @@ from super_mapyo_bros.power_up.mushroom_state_spawn import MushroomStateSpawn
 
 
 class Mushroom(Entity):
-    def __init__(self, x, y, w, h, color) -> None:
+    def __init__(self, x, y, w, h, color, level) -> None:
         super().__init__(x, y, w, h, color)
         self.allStates = {
             "spawn": MushroomStateSpawn(),
-            "move": MushroomStateMove(),
+            "move": MushroomStateMove(level),
             "fall": MushroomStateFall() }
         self.prevState = self.allStates.get("spawn")
         self.currState = self.prevState
@@ -23,4 +23,4 @@ class Mushroom(Entity):
 
     def draw(self, screen, camera) -> None:
         if self.active:
-            super().draw(self)
+            super().draw(screen, camera)

@@ -38,6 +38,8 @@ def should_fall(entity, level) -> bool:
 
 
 def updateFall(entity, deltaTime) -> bool:
+    from super_mapyo_bros.mario.mario import Mario
+    
     landed = False
     
     # Check for landing

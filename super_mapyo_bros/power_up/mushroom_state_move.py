@@ -1,8 +1,14 @@
 from super_mapyo_bros.mario.mario import Mario
 from super_mapyo_bros.state import State
+from super_mapyo_bros.utils import collision_sides, should_fall
 
 
 class MushroomStateMove(State):
+    level = None
+    
+    def __init__(self, level) -> None:
+        self.level = level
+
     def enterState(self, entity) -> None:
         return
 
@@ -14,7 +20,7 @@ class MushroomStateMove(State):
             entity.translate(0.15 * deltaTime, 0)
 
         # Check if should fall.
-        shouldFall = should_fall(entity)
+        shouldFall = should_fall(entity, self.level)
 
         if shouldFall:
             entity.changeState("fall")

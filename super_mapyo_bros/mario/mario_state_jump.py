@@ -1,7 +1,13 @@
-from sre_parse import State
+from pygame import K_LSHIFT, K_a, K_d
+from pygame.key import get_pressed
+from super_mapyo_bros.constants import *
+from super_mapyo_bros.enemy.enemy import Enemy
+from super_mapyo_bros.globals import *
+from super_mapyo_bros.state import State
+from super_mapyo_bros.utils import collision_sides
 
 
-class MarioStateJump (State):
+class MarioStateJump(State):
     def enterState(self, entity) -> None:
         entity.dy = 0
         entity.velocity = -0.2
@@ -10,7 +16,7 @@ class MarioStateJump (State):
 
     def execute(self, entity, deltaTime) -> None:
         # Check in-air movement.
-        key = pygame.key.get_pressed()
+        key =   get_pressed()
         speed = entity.speed
         jumpGravity = gravity
 

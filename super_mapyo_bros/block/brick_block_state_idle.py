@@ -1,4 +1,6 @@
+from super_mapyo_bros.mario.mario import Mario
 from super_mapyo_bros.state import State
+from super_mapyo_bros.utils import collision_sides
 
 
 class BrickBlockStateIdle(State):

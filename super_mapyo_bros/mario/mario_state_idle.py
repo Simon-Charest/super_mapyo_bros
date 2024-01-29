@@ -1,6 +1,8 @@
 from pygame.key import get_pressed
 from pygame import K_a, K_d, K_SPACE
+from super_mapyo_bros.enemy.enemy import Enemy
 from super_mapyo_bros.state import State
+from super_mapyo_bros.utils import collision_sides
 
 
 class MarioStateIdle (State):
