@@ -10,8 +10,8 @@ class EnemyStateWait(State):
         
         # Wait until player reaches some X position on the
         # level before updating and drawing this enemy instance.
-        if x > -1 and x > entity.spawnX:
+        if x > -1 and x > entity.spawn_x:
             entity.change_state("move")
 
     def exit_state(self, entity) -> None:
-        entity.isSpawned = True
+        entity.is_spawned = True
