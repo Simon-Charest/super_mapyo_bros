@@ -9,14 +9,14 @@ class QuestionBlock(Entity):
     def __init__(self, x, y, w, h, contents, color, level) -> None:
         self.level = level
         super().__init__(x, y, w, h, color)
-        self.allStates = {
+        self.all_states = {
             "idle": QuestionBlockStateIdle(),
             "hit": QuestionBlockStateHit(level)
         }
-        self.prevState = self.allStates.get("idle")
-        self.currState = self.prevState
+        self.prev_state = self.all_states.get("idle")
+        self.curr_state = self.prev_state
         self.contents = contents
         self.used = False
 
-    def update(self, deltaTime) -> None:
-        self.currState.execute(self, deltaTime)
+    def update(self, delta_time) -> None:
+        self.curr_state.execute(self, delta_time)

@@ -8,11 +8,11 @@ from super_mapyo_bros.utils import collision_sides
 
 
 class MarioStateFall(State):
-    def enterState(self, entity) -> None:
+    def enter_state(self, entity) -> None:
         self.dx = 0
         entity.velocity = 0
     
-    def execute(self, entity, deltaTime) -> None:
+    def execute(self, entity, delta_time) -> None:
         # Check in-air movement.
         key = get_pressed()
         speed = entity.speed
@@ -27,27 +27,27 @@ class MarioStateFall(State):
             self.dx = speed
 
         # Check for landing
-        if entity.hasCollision:
-            for tile in entity.collidingObjects:
+        if entity.has_collision:
+            for tile in entity.colliding_objects:
                 sides = collision_sides(entity.rect, tile.rect)
                 if sides.bottom:
-                    if isinstance(tile, Enemy) and not tile.isDead:
+                    if isinstance(tile, Enemy) and not tile.is_dead:
                         entity.dy = 0
                         entity.velocity = -0.15
                     else:
-                        entity.setY(tile.top() - entity.h)
-                        entity.changeState("idle")
+                        entity.set_y(tile.top() - entity.h)
+                        entity.change_state("idle")
                         return
         
-        if entity.dy > maxVelocity:
-            entity.dy = maxVelocity
+        if entity.dy > max_velocity:
+            entity.dy = max_velocity
 
         else:
             entity.dy += entity.velocity
             
         entity.velocity += gravity
-        entity.translate(self.dx * deltaTime, entity.dy * deltaTime)
+        entity.translate(self.dx * delta_time, entity.dy * delta_time)
 
-    def exitState(self, entity) -> None:
-        entity.hasCollision = False
-        entity.collidingObjects = []
+    def exit_state(self, entity) -> None:
+        entity.has_collision = False
+        entity.colliding_objects = []

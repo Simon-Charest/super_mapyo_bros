@@ -2,13 +2,13 @@ from sre_parse import State
 
 
 class CoinStateUnused(State):
-    def enterState(self, entity) -> None:
-       entity.setX(-100)
-       entity.setY(0)
+    def enter_state(self, entity) -> None:
+       entity.set_x(-100)
+       entity.set_y(0)
        entity.active = False
 
-    def execute(self, entity, deltaTime) -> None:
+    def execute(self, entity, delta_time) -> None:
         return
 
-    def exitState(self, entity) -> None:
+    def exit_state(self, entity) -> None:
         return

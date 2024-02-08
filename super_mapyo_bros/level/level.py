@@ -23,84 +23,84 @@ class Level:
             j = 0
 
             for tile in row:
-                self.loadItem(tile, j, i)
+                self.load_item(tile, j, i)
                 j += 1
 
             i += 1
 
         # Add reusable items.
-        self.entities.append(Coin(-100, 0, 10, 30, coinColor))
-        self.entities.append(Mushroom(-100, 100, tileWidth, tileWidth, mushroomColor, self))
-        #self.entities.append(Star(-100, 200, tileWidth, tileWidth, starColor))
-        #self.entities.append(OneUp(-100, 300, tileWidth, tileWidth, oneUpColor))
-        #self.entities.append(Flower(-100, 400, tileWidth, tileWidth, flowerColor))
+        self.entities.append(Coin(-100, 0, 10, 30, coin_color))
+        self.entities.append(Mushroom(-100, 100, tile_width, tile_width, mushroom_color, self))
+        #self.entities.append(Star(-100, 200, tile_width, tile_width, star_color))
+        #self.entities.append(OneUp(-100, 300, tile_width, tile_width, one_up_color))
+        #self.entities.append(Flower(-100, 400, tile_width, tile_width, flower_color))
 
-    def loadItem(self, tile, x, y) -> None:
-        xPos = x * tileWidth
-        yPos = y * tileWidth
+    def load_item(self, tile, x, y) -> None:
+        xPos = x * tile_width
+        yPos = y * tile_width
 
-        if (tile == blankTile):
+        if (tile == blank_tile):
             return
         
-        elif (tile == groundTile):
-            self.map.append(GroundBlock(xPos, yPos, tileWidth, tileWidth, groundBrown))
+        elif (tile == ground_tile):
+            self.map.append(GroundBlock(xPos, yPos, tile_width, tile_width, ground_brown))
 
-        elif (tile == marioTile):
-            self.entities.append(Mario(xPos, yPos+10, tileWidth-10, tileWidth-10, white, self))
+        elif (tile == mario_tile):
+            self.entities.append(Mario(xPos, yPos + 10, tile_width - 10, tile_width - 10, white, self))
 
-        elif (tile == blockTile):
-            self.map.append(BrickBlock(xPos, yPos, tileWidth, tileWidth, brickBrown))
+        elif (tile == block_tile):
+            self.map.append(BrickBlock(xPos, yPos, tile_width, tile_width, brick_brown))
 
-        elif (tile == qCoinTile):
-            self.map.append(QuestionBlock(xPos, yPos, tileWidth, tileWidth, "coin", gold, self))
+        elif (tile == q_coin_tile):
+            self.map.append(QuestionBlock(xPos, yPos, tile_width, tile_width, "coin", gold, self))
 
-        elif (tile == qMushTile):
-            self.map.append(QuestionBlock(xPos, yPos, tileWidth, tileWidth, "mushroom", gold, self))
+        elif (tile == q_mush_tile):
+            self.map.append(QuestionBlock(xPos, yPos, tile_width, tile_width, "mushroom", gold, self))
 
-        elif (tile == pipeTile):
-            self.map.append(Pipe(xPos, yPos, tileWidth, tileWidth, green))
+        elif (tile == pipe_tile):
+            self.map.append(Pipe(xPos, yPos, tile_width, tile_width, green))
 
-        elif (tile == goombaTile):
-            self.entities.append(Goomba(xPos, yPos, tileWidth, tileWidth, xPos - screenSize[0]/2, goombaColor))
+        elif (tile == goomba_tile):
+            self.entities.append(Goomba(xPos, yPos, tile_width, tile_width, xPos - screen_size[0] / 2, goomba_color))
 
-        elif (tile == koopaTile):
-            self.entities.append(Koopa(xPos, yPos, tileWidth, tileWidth, xPos - screenSize[0]/2, koopaColor))
+        elif (tile == koopa_tile):
+            self.entities.append(Koopa(xPos, yPos, tile_width, tile_width, xPos - screen_size[0] / 2, koopa_color))
 
-    def update(self, deltaTime) -> None:
+    def update(self, delta_time) -> None:
         for tile in self.map:
-            tile.update(deltaTime)
+            tile.update(delta_time)
 
         for entity in self.entities:
-            entity.update(deltaTime)
+            entity.update(delta_time)
         
-        self.checkCollisions()
+        self.check_collisions()
 
-    def checkCollisions(self) -> None:
+    def check_collisions(self) -> None:
         for entity in self.entities:
             # Check Mario/Entity collisions.
             if not isinstance(entity, Mario):
-                mario = self.getMario()
+                mario = self.get_mario()
 
                 if entity.rect.colliderect(mario.rect):
-                    entity.addCollision(mario)
-                    mario.addCollision(entity)
+                    entity.add_collision(mario)
+                    mario.add_collision(entity)
 
             # Check Entity/World collisions.
             for tile in self.map:
                 if tile.rect.colliderect(entity.rect):
-                    entity.addCollision(tile)
-                    tile.addCollision(entity)
+                    entity.add_collision(tile)
+                    tile.add_collision(entity)
 
-    def removeEntity(self, entity) -> None:
+    def remove_entity(self, entity) -> None:
         self.entities.remove(entity)
 
-    def removeTile(self, tile) -> None:
+    def remove_tile(self, tile) -> None:
         self.map.remove(tile)
 
-    def addEntity(self, entity) -> None:
+    def add_entity(self, entity) -> None:
         self.entities.append(entity)
                 
-    def getMario(self) -> None:
+    def get_mario(self) -> Mario:
         for entity in self.entities:
             if isinstance(entity, Mario):
                 return entity

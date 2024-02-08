@@ -1,28 +1,30 @@
-from pygame import Rect
+from pygame import Rect, Surface
 from pygame.draw import rect
-    
+from super_mapyo_bros.camera import Camera
+from typing import List, Type
+
 
 class Entity(object):
-    x = 0
-    y = 0
-    w = 0
-    h = 0
-    rect = Rect(x,y,w,h)
-    color = [0,0,0]
-    direction = "right"
-    currState = None
-    prevState = None
+    x: float = 0
+    y: float = 0
+    w: float = 0
+    h: float = 0
+    rect: Rect = Rect(x, y, w, h)
+    color: List[int] = [0, 0, 0]
+    direction: str = "right"
+    curr_state = None
+    prev_state = None
         
-    def __init__(self, x, y, w, h, color) -> None:
+    def __init__(self, x: float, y: float, w: float, h: float, color: List[int]) -> None:
         self.x = x
         self.y = y
         self.w = w
         self.h = h
         self.color = color
-        self.rect = Rect(x,y,w,h)
-        self.allStates = {}
-        self.collidingObjects = []
-        self.hasCollision = False
+        self.rect = Rect(x, y, w, h)
+        self.all_states = {}
+        self.colliding_objects = []
+        self.has_collision = False
 
     def left(self) -> int:
         return self.x
@@ -36,15 +38,15 @@ class Entity(object):
     def top(self) -> int:
         return self.y
     
-    def setY(self, y) -> None:
+    def set_y(self, y: float) -> None:
         self.y = y
         self.rect = Rect(self.x, self.y, self.w, self.h)
 
-    def setX(self, x) -> None:
+    def set_x(self, x: float) -> None:
         self.x = x
         self.rect = Rect(self.x, self.y, self.w, self.h)
 
-    def translate(self, dx, dy) -> None:
+    def translate(self, dx: float, dy: float) -> None:
         from super_mapyo_bros.mario.mario import Mario
 
         if dx < 0:
@@ -61,20 +63,20 @@ class Entity(object):
         self.y += dy
         self.rect = Rect(self.x,self.y,self.w,self.h)
 
-    def changeState(self, stateID) -> None:
-        if self.allStates.get(stateID) is None:
+    def change_state(self, stateID: str) -> None:
+        if not self.all_states.get(stateID):
             return
         
         else:
-            self.newState = self.allStates.get(stateID)
-            self.currState.exitState(self)
-            self.prevState = self.currState
-            self.currState = self.newState
-            self.currState.enterState(self)
+            self.new_state = self.all_states.get(stateID)
+            self.curr_state.exit_state(self)
+            self.prev_state = self.curr_state
+            self.curr_state = self.new_state
+            self.curr_state.enter_state(self)
 
-    def addCollision(self, collided) -> None:
-        self.collidingObjects.append(collided)
-        self.hasCollision = True
+    def add_collision(self, collided: Type["Entity"]) -> None:
+        self.colliding_objects.append(collided)
+        self.has_collision = True
 
-    def draw(self, screen, camera) -> None:
+    def draw(self, screen: Surface, camera: Camera) -> None:
         rect(screen, self.color, [self.x - camera.x, self.y - camera.y, self.w, self.h], 0)

@@ -2,41 +2,41 @@ from super_mapyo_bros.state import State
 
 
 class KoopaStateShellMove(State):
-    def enterState(self, entity) -> None:
+    def enter_state(self, entity) -> None:
         return
 
-    def execute(self, entity, deltaTime) -> None:
+    def execute(self, entity, delta_time) -> None:
         if entity.direction == "left":
-            entity.translate(-(0.8 * deltaTime), 0)
+            entity.translate(-(0.8 * delta_time), 0)
 
         else:
-            entity.translate(0.8 * deltaTime, 0)
+            entity.translate(0.8 * delta_time, 0)
 
         # Check if should fall.
         shouldFall = should_fall(entity)
 
         if shouldFall:
-            entity.changeState("fall")
+            entity.change_state("fall")
 
         # Check for move into something.
-        if entity.hasCollision:
-            for tile in entity.collidingObjects:
+        if entity.has_collision:
+            for tile in entity.colliding_objects:
                 sides = collision_sides(entity.rect, tile.rect)
                 
                 # That something was Mario.
                 if sides.top and isinstance(tile, Mario):
-                    entity.changeState("stomped")
+                    entity.change_state("stomped")
                 
                 if sides.left:
-                    entity.setX(tile.x + tile.w)
+                    entity.set_x(tile.x + tile.w)
                     entity.direction = "right"
                     
                 elif sides.right:
-                    entity.setX(tile.x - entity.w)
+                    entity.set_x(tile.x - entity.w)
                     entity.direction = "left"
                 
-            entity.hasCollision = False
-            entity.collidingObjects = []
+            entity.has_collision = False
+            entity.colliding_objects = []
 
-    def exitState(self, entity) -> None:
+    def exit_state(self, entity) -> None:
         return

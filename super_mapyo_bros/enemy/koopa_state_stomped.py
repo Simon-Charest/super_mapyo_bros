@@ -1,8 +1,11 @@
+from pygame import Rect
+from super_mapyo_bros.mario.mario import Mario
 from super_mapyo_bros.state import State
+from super_mapyo_bros.utils import collision_sides
 
 
 class KoopaStateStomped(State):
-    def enterState(self, entity) -> None:
+    def enter_state(self, entity) -> None:
         self.time = 0
         self.recoverTime = 5000 # five seconds
 
@@ -12,24 +15,24 @@ class KoopaStateStomped(State):
             entity.rect = Rect(entity.x, entity.y, entity.w, entity.h)
 
         entity.inShell = True
-        entity.isDead = True
+        entity.is_dead = True
 
-    def execute(self, entity, deltaTime) -> None:
-        self.time += deltaTime
+    def execute(self, entity, delta_time) -> None:
+        self.time += delta_time
 
         # Come back out of shell.
         if self.time > self.recoverTime:
-            entity.isDead = False
+            entity.is_dead = False
             entity.inShell = False
-            entity.changeState("move")
+            entity.change_state("move")
             entity.y -= entity.h*2
             entity.h *= 2
             entity.rect = Rect(entity.x, entity.y, entity.w, entity.h)
             return
 
         # Otherwise check for mario hitting it in some direction.
-        if entity.hasCollision:
-            for tile in entity.collidingObjects:
+        if entity.has_collision:
+            for tile in entity.colliding_objects:
                 sides = collision_sides(entity.rect, tile.rect)
                 if isinstance(tile, Mario):
                     # Decide which way to shoot shell.
@@ -38,11 +41,11 @@ class KoopaStateStomped(State):
                     else:
                         entity.direction = "left"
                     # Shoot shell.
-                    entity.isDead = False
-                    entity.changeState("shellMove")
+                    entity.is_dead = False
+                    entity.change_state("shellMove")
 
-            entity.hasCollision = False
-            entity.collidingObjects = []
+            entity.has_collision = False
+            entity.colliding_objects = []
 
-    def exitState(self, entity) -> None:
+    def exit_state(self, entity) -> None:
         return

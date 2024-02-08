@@ -5,9 +5,9 @@ from super_mapyo_bros.entity import Entity
 class Pipe(Entity):
     def __init__(self, x, y, w, h, color) -> None:
         super().__init__(x, y, w, h, color)
-        self.allStates = { "idle":PipeStateIdle() }
-        self.prevState = self.allStates.get("idle")
-        self.currState = self.prevState
+        self.all_states = { "idle": PipeStateIdle() }
+        self.prev_state = self.all_states.get("idle")
+        self.curr_state = self.prev_state
 
-    def update(self, deltaTime) -> None:
-        self.currState.execute(self, deltaTime)
+    def update(self, delta_time) -> None:
+        self.curr_state.execute(self, delta_time)

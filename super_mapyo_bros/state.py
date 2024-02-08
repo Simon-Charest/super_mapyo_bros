@@ -1,9 +1,12 @@
+from super_mapyo_bros.entity import Entity
+
+
 class State(object):
-    def enterState(self, entity) -> None:
+    def enter_state(self, entity: Entity) -> None:
         raise NotImplementedError("Please Implement enter() in State subclass.")
 
-    def execute(self, entity, deltaTime) -> None:
+    def execute(self, entity: Entity, delta_time) -> None:
         raise NotImplementedError("Please Implement execute() in State subclass.")
 
-    def exitState(self, entity) -> None:
+    def exit_state(self, entity: Entity) -> None:
         raise NotImplementedError("Please Implement exit() in State subclass.")

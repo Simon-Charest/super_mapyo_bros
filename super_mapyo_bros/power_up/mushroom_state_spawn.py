@@ -1,19 +1,19 @@
-from super_mapyo_bros.globals import tileWidth
+from super_mapyo_bros.globals import tile_width
 from super_mapyo_bros.state import State
 
 
 class MushroomStateSpawn(State):
-    def enterState(self, entity) -> None:
+    def enter_state(self, entity) -> None:
        entity.active = True
        self.startY = entity.y
 
-    def execute(self, entity, deltaTime) -> None:
-        dy = 0.05 * deltaTime
+    def execute(self, entity, delta_time) -> None:
+        dy = 0.05 * delta_time
         entity.translate(0, -dy)
 
-        if entity.y <= self.startY - tileWidth:
+        if entity.y <= self.startY - tile_width:
             entity.direction = "right"
-            entity.changeState("move")
+            entity.change_state("move")
 
-    def exitState(self, entity) -> None:
+    def exit_state(self, entity) -> None:
         return

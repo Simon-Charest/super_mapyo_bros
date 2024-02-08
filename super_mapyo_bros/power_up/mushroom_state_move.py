@@ -1,52 +1,54 @@
+from super_mapyo_bros.entity import Entity
 from super_mapyo_bros.mario.mario import Mario
 from super_mapyo_bros.state import State
 from super_mapyo_bros.utils import collision_sides, should_fall
+from typing import Type
 
 
 class MushroomStateMove(State):
     level = None
     
-    def __init__(self, level) -> None:
+    def __init__(self, level: Type["LevelOneOne"]) -> None:
         self.level = level
 
-    def enterState(self, entity) -> None:
+    def enter_state(self, entity: Entity) -> None:
         return
 
-    def execute(self, entity, deltaTime) -> None:
+    def execute(self, entity, delta_time) -> None:
         if entity.direction == "left":
-            entity.translate(-(0.15 * deltaTime), 0)
+            entity.translate(-(0.15 * delta_time), 0)
 
         else:
-            entity.translate(0.15 * deltaTime, 0)
+            entity.translate(0.15 * delta_time, 0)
 
         # Check if should fall.
         shouldFall = should_fall(entity, self.level)
 
         if shouldFall:
-            entity.changeState("fall")
+            entity.change_state("fall")
 
         # Check for move into something.
-        if entity.hasCollision:
-            for tile in entity.collidingObjects:
+        if entity.has_collision:
+            for tile in entity.colliding_objects:
                 sides = collision_sides(entity.rect, tile.rect)
                 
                 # That something was Mario.
                 if sides.top and isinstance(tile, Mario):
                     entity.active = False
-                    entity.setX(-100)
-                    entity.setY(100)
-                    entity.changeState("spawn")
+                    entity.set_x(-100)
+                    entity.set_y(100)
+                    entity.change_state("spawn")
                     
                 if sides.left:
-                    entity.setX(tile.x + tile.w)
+                    entity.set_x(tile.x + tile.w)
                     entity.direction = "right"
 
                 elif sides.right:
-                    entity.setX(tile.x - entity.w)
+                    entity.set_x(tile.x - entity.w)
                     entity.direction = "left"
                 
-            entity.hasCollision = False
-            entity.collidingObjects = []
+            entity.has_collision = False
+            entity.colliding_objects = []
 
-    def exitState(self, entity) -> None:
+    def exit_state(self, entity) -> None:
         return

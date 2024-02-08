@@ -1,32 +1,34 @@
 from super_mapyo_bros.constants import *
 from super_mapyo_bros.globals import *
-from typing import List
+from typing import List, Type
 
 
 class Camera:
-    level = None
-    screenSize: List[int]
+    level: Type["LevelOneOne"]
+    screen_size: List[int]
     
-    def __init__(self, level, screenSize) -> None:
+    def __init__(self, level: Type["LevelOneOne"], screen_size: List[int]) -> None:
         self.level = level
-        self.screenSize = screenSize
+        self.screen_size = screen_size
         self.getValues()
         self.x = 0
         self.y = 0
-        self.w = screenSize[0]
-        self.h = screenSize[1]
+        self.w = screen_size[0]
+        self.h = screen_size[1]
 
     def update(self) -> None:
         self.getValues()
 
     def getValues(self) -> None:
-        mario = self.level.getMario()
+        from super_mapyo_bros.mario.mario import Mario
 
-        if mario is None:
+        mario: Mario = self.level.get_mario()
+
+        if not mario:
             return
         
-        if mario.x < self.screenSize[0]/2:
+        if mario.x < self.screen_size[0] / 2:
             self.x = 0
             
         else:
-            self.x = self.level.getMario().x - self.screenSize[0]/2 + tileWidth/2
+            self.x = mario.x - self.screen_size[0] / 2 + tile_width / 2

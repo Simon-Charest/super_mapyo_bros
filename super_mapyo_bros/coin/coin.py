@@ -6,14 +6,17 @@ from super_mapyo_bros.entity import Entity
 class Coin (Entity):
     def __init__(self, x, y, w, h, color) -> None:
         super().__init__(x, y, w, h, color)
-        self.allStates = { "idle":CoinStateIdle(), "unused":CoinStateUnused() }
-        self.prevState = self.allStates.get("idle")
-        self.currState = self.prevState
+        self.all_states = {
+            "idle": CoinStateIdle(),
+            "unused": CoinStateUnused()
+        }
+        self.prev_state = self.all_states.get("idle")
+        self.curr_state = self.prev_state
         self.active = False
 
-    def update(self, deltaTime) -> None:
+    def update(self, delta_time) -> None:
         if self.active:
-            self.currState.execute(self, deltaTime)
+            self.curr_state.execute(self, delta_time)
 
     def draw(self, screen, camera) -> None:
         if self.active:

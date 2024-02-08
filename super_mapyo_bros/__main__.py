@@ -1,4 +1,4 @@
-from pygame import init, quit
+from pygame import Surface, init, quit
 from pygame.display import set_caption, set_mode
 from pygame.event import get
 from pygame.locals import K_ESCAPE, KEYDOWN, QUIT
@@ -7,7 +7,13 @@ from super_mapyo_bros.constants import *
 from super_mapyo_bros.globals import *
 from super_mapyo_bros.camera import Camera
 from super_mapyo_bros.level.level_one_one import LevelOneOne
+from super_mapyo_bros.mario.mario import Mario
 from super_mapyo_bros.utils import render, tick
+
+level: LevelOneOne
+screen: Surface
+camera: Camera
+clock: Clock
 
 
 def main() -> None:
@@ -17,10 +23,10 @@ def main() -> None:
     global clock
 
     init()
-    level = LevelOneOne(levelHandle)
-    screen = set_mode(screenSize)
+    level = LevelOneOne(level_handle)
+    screen = set_mode(screen_size)
     set_caption(title)
-    camera = Camera(level, screenSize)
+    camera = Camera(level, screen_size)
     clock = Clock()
 
     while True:
@@ -33,11 +39,11 @@ def main() -> None:
 
         tick(clock, level, camera)
         render(screen, level, camera)
-        mario = level.getMario()
+        mario: Mario = level.get_mario()
         
-        # If not mario is None and mario.isDead:
-        if mario and mario.y > screenSize[1] or mario.isDead:
-            print("Game Over")
+        # If not mario is None and mario.is_dead:
+        if mario and mario.y > screen_size[1] or mario.is_dead:
+            print(game_over)
             break
 
     quit()

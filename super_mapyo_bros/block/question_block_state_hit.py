@@ -11,27 +11,28 @@ class QuestionBlockStateHit(State):
     def __init__(self, level) -> None:
         self.level = level
     
-    def enterState(self, entity) -> None:
+    def enter_state(self, entity) -> None:
         entity.color = grey
+        
         if not entity.used:
             entity.used = True
 
             if entity.contents == "coin":
                 for obj in self.level.entities:
                     if isinstance(obj, Coin):
-                        obj.setX(entity.x + 20)
-                        obj.setY(entity.y - tileWidth)
-                        obj.changeState("idle")
+                        obj.set_x(entity.x + 20)
+                        obj.set_y(entity.y - tile_width)
+                        obj.change_state("idle")
 
             elif entity.contents == "mushroom":
                 for obj in self.level.entities:
                     if isinstance(obj, Mushroom):
-                        obj.setX(entity.x)
-                        obj.setY(entity.y)
-                        obj.changeState("spawn")
+                        obj.set_x(entity.x)
+                        obj.set_y(entity.y)
+                        obj.change_state("spawn")
                     
-    def execute(self, entity, deltaTime) -> None:
+    def execute(self, entity, delta_time) -> None:
         return
 
-    def exitState(self, entity) -> None:
+    def exit_state(self, entity) -> None:
         return

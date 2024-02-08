@@ -2,22 +2,22 @@ from super_mapyo_bros.state import State
 
 
 class EnemyStateFall(State):
-    def enterState(self, entity) -> None:
+    def enter_state(self, entity) -> None:
         entity.velocity = 0
 
-    def execute(self, entity, deltaTime) -> None:
+    def execute(self, entity, delta_time) -> None:
         # Update X
         if entity.direction == "left":
-            entity.translate(-(0.1 * deltaTime), 0)
+            entity.translate(-(0.1 * delta_time), 0)
         else:
-            entity.translate(0.1 * deltaTime, 0)
+            entity.translate(0.1 * delta_time, 0)
 
         # Update Y
-        landed = updateFall(entity, deltaTime)
+        landed = update_fall(entity, delta_time)
 
         # Check land
         if landed:
-            entity.changeState("move")
+            entity.change_state("move")
 
-    def exitState(self, entity) -> None:
+    def exit_state(self, entity) -> None:
         return

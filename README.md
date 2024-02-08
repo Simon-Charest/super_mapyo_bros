@@ -2,9 +2,10 @@
 
 ## Built With
 - [Python](https://www.python.org);
+- [Visual Studio Code](https://code.visualstudio.com).
 - [venv](https://docs.python.org/library/venv);
 - [pip](https://pip.pypa.io);
-- [Pygame](https://www.pygame.org).
+- [Pygame](https://www.pygame.org);
 
 ## Getting Started
 

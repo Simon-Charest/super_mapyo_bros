@@ -6,32 +6,32 @@ from super_mapyo_bros.utils import collision_sides
 
 
 class MarioStateIdle (State):
-    def enterState(self, entity) -> None:
+    def enter_state(self, entity) -> None:
         return
 
-    def execute(self, entity, deltaTime) -> None:
+    def execute(self, entity, delta_time) -> None:
         key = get_pressed()
         
         if key[K_SPACE]:
-            entity.changeState("jump")
+            entity.change_state("jump")
 
         elif key[K_a]:
             entity.direction = "left"
-            entity.changeState("move")
+            entity.change_state("move")
 
         elif key[K_d]:
             entity.direction = "right"
-            entity.changeState("move")
+            entity.change_state("move")
 
-        if entity.hasCollision:
-            for tile in entity.collidingObjects:
+        if entity.has_collision:
+            for tile in entity.colliding_objects:
                 sides = collision_sides(entity.rect, tile.rect)
-                if isinstance(tile, Enemy) and not tile.isDead and (sides.left or sides.right or sides.top):
-                    entity.isDead = True
+                if isinstance(tile, Enemy) and not tile.is_dead and (sides.left or sides.right or sides.top):
+                    entity.is_dead = True
 
-            entity.hasCollision = False
-            entity.collidingObjects = []
+            entity.has_collision = False
+            entity.colliding_objects = []
 
-    def exitState(self, entity) -> None:
-        entity.hasCollision = False
-        entity.collidingObjects = []
+    def exit_state(self, entity) -> None:
+        entity.has_collision = False
+        entity.colliding_objects = []

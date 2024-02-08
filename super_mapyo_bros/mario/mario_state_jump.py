@@ -8,13 +8,13 @@ from super_mapyo_bros.utils import collision_sides
 
 
 class MarioStateJump(State):
-    def enterState(self, entity) -> None:
+    def enter_state(self, entity) -> None:
         entity.dy = 0
         entity.velocity = -0.2
         self.startHeight = entity.y
         self.dx = 0
 
-    def execute(self, entity, deltaTime) -> None:
+    def execute(self, entity, delta_time) -> None:
         # Check in-air movement.
         key =   get_pressed()
         speed = entity.speed
@@ -31,32 +31,32 @@ class MarioStateJump(State):
             self.dx = speed
 
         # Check collisions.
-        if entity.hasCollision:
-            for tile in entity.collidingObjects:
+        if entity.has_collision:
+            for tile in entity.colliding_objects:
                 sides = collision_sides(entity.rect, tile.rect)
                 if sides.top:
-                    entity.setY(tile.bottom() + (entity.y - tile.y))
+                    entity.set_y(tile.bottom() + (entity.y - tile.y))
                     entity.velocity = 0
                     entity.dy = 0
                 if sides.bottom:
-                    if isinstance(tile, Enemy) and not tile.isDead:
+                    if isinstance(tile, Enemy) and not tile.is_dead:
                         entity.dy = 0
                         entity.velocity = -0.15
                     else:
-                        entity.setY(tile.top() - entity.h)
-                        entity.changeState("idle")
+                        entity.set_y(tile.top() - entity.h)
+                        entity.change_state("idle")
                         return
 
         # Don't go so fast that collisions are missed
-        if entity.dy > maxVelocity:
-            entity.dy = maxVelocity
+        if entity.dy > max_velocity:
+            entity.dy = max_velocity
 
         else:
             entity.dy += entity.velocity
         
         entity.velocity += jumpGravity
-        entity.translate(self.dx * deltaTime, entity.dy * deltaTime)
+        entity.translate(self.dx * delta_time, entity.dy * delta_time)
 
-    def exitState(self, entity) -> None:
-        entity.hasCollision = False
-        entity.collidingObjects = []
+    def exit_state(self, entity) -> None:
+        entity.has_collision = False
+        entity.colliding_objects = []

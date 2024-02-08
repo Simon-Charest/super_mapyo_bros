@@ -4,20 +4,20 @@ from super_mapyo_bros.utils import collision_sides
 
 
 class BrickBlockStateIdle(State):
-    def enterState(self, entity) -> None:
+    def enter_state(self, entity) -> None:
         return
 
-    def execute(self, entity, deltaTime) -> None:
-        if entity.hasCollision:
-            for tile in entity.collidingObjects:
+    def execute(self, entity, delta_time) -> None:
+        if entity.has_collision:
+            for tile in entity.colliding_objects:
                 sides = collision_sides(entity.rect, tile.rect)
 
                 # If Mario jumped up and collided with block.
                 if isinstance(tile, Mario) and tile.y > entity.y:
-                    entity.changeState("hitLight")
+                    entity.change_state("hitLight")
 
-            entity.hasCollision = False
-            entity.collidingObjects = []
+            entity.has_collision = False
+            entity.colliding_objects = []
 
-    def exitState(self, entity) -> None:
+    def exit_state(self, entity) -> None:
         return
