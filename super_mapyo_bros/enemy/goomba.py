@@ -5,7 +5,7 @@ from super_mapyo_bros.enemy.enemy_state_fall import EnemyStateFall
 from super_mapyo_bros.enemy.enemy_state_move import EnemyStateMove
 from super_mapyo_bros.enemy.enemy_state_wait import EnemyStateWait
 from super_mapyo_bros.enemy.goomba_state_stomped import GoombaStateStomped
-from typing import List
+from typing import List, Type
 
 
 class Goomba(Enemy):
@@ -15,16 +15,18 @@ class Goomba(Enemy):
     is_dead_dead: bool
     velocity: int
     dy: int
+    level: Type["LevelOneOne"]
     
-    def __init__(self, x: float, y: float, w: float, h: float, spawn_x: int, color: List[int]) -> None:
+    def __init__(self, x: float, y: float, w: float, h: float, spawn_x: int, color: List[int], level: Type["LevelOneOne"]) -> None:
         super().__init__(x, y, w, h, color)
+        self.level = level
         self.all_states = {
             "wait": EnemyStateWait(),
-            "move": EnemyStateMove(),
+            "move": EnemyStateMove(self.level),
             "fall": EnemyStateFall(),
-            "stomped": GoombaStateStomped()
+            "stomped": GoombaStateStomped(self.level)
         }
-        self.prev_state = self.all_states.get("wait")
+        self.prev_state = self.all_states.get("move")
         self.curr_state = self.prev_state
         self.spawn_x = spawn_x
         self.direction = "left"

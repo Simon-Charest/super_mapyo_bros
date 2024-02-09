@@ -64,10 +64,10 @@ class Level:
             self.map.append(Pipe(x_pos, y_pos, tile_width, tile_width, green))
 
         elif (tile == goomba_tile):
-            self.entities.append(Goomba(x_pos, y_pos, tile_width, tile_width, x_pos - screen_size[0] / 2, goomba_color))
+            self.entities.append(Goomba(x_pos, y_pos, tile_width, tile_width, x_pos - screen_size[0] / 2, goomba_color, self))
 
         elif (tile == koopa_tile):
-            self.entities.append(Koopa(x_pos, y_pos, tile_width, tile_width, x_pos - screen_size[0] / 2, koopa_color))
+            self.entities.append(Koopa(x_pos, y_pos, tile_width, tile_width, x_pos - screen_size[0] / 2, koopa_color, self))
 
     def update(self, delta_time: int) -> None:
         tile: BrickBlock

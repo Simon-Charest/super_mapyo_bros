@@ -6,9 +6,14 @@ from typing import Type
 
 
 class GoombaStateStomped(State):
+    level: Type["LevelOneOne"]
+
+    def __init__(self, level: Type["LevelOneOne"]) -> None:
+        self.level = level
+
     def enter_state(self, entity: Entity) -> None:
         self.time = 0
-        self.squishTime = 1000 # one second
+        self.squishTime = 1000  # one second
         entity.y += entity.h/2
         entity.h /= 2
         entity.rect = Rect(entity.x, entity.y, entity.w, entity.h)
@@ -16,11 +21,11 @@ class GoombaStateStomped(State):
 
     def execute(self, entity: Entity, delta_time: int) -> None:
         self.time += delta_time
-
+    
         # When time is up, switch to any state to remove goomba for good.
         if self.time > self.squishTime:
             entity.change_state("move")
 
-    def exit_state(self, entity: Entity, level: Type["LevelOneOne"]) -> None:
+    def exit_state(self, entity: Entity) -> None:
         entity.is_dead_dead = True
-        level.remove_entity(entity)
+        self.level.remove_entity(entity)

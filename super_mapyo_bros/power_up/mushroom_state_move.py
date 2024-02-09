@@ -6,7 +6,7 @@ from typing import Type
 
 
 class MushroomStateMove(State):
-    level = None
+    level: Type["LevelOneOne"]
     
     def __init__(self, level: Type["LevelOneOne"]) -> None:
         self.level = level

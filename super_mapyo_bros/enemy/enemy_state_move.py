@@ -2,9 +2,15 @@ from super_mapyo_bros.entity import Entity
 from super_mapyo_bros.mario.mario import Mario
 from super_mapyo_bros.state import State
 from super_mapyo_bros.utils import collision_sides, should_fall
+from typing import Type
 
 
 class EnemyStateMove(State):
+    level: Type["LevelOneOne"]
+    
+    def __init__(self, level: Type["LevelOneOne"]) -> None:
+        self.level = level
+
     def enter_state(self, entity: Entity) -> None:
         return
 
@@ -16,7 +22,7 @@ class EnemyStateMove(State):
             entity.translate(0.1 * delta_time, 0)
 
         # Check if should fall.
-        shouldFall = should_fall(entity)
+        shouldFall = should_fall(entity, self.level)
 
         if shouldFall:
             entity.change_state("fall")

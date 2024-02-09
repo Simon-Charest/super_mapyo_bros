@@ -6,6 +6,7 @@ from super_mapyo_bros.enemy.enemy_state_move import EnemyStateMove
 from super_mapyo_bros.enemy.enemy_state_wait import EnemyStateWait
 from super_mapyo_bros.enemy.koopa_state_shell_move import KoopaStateShellMove
 from super_mapyo_bros.enemy.koopa_state_stomped import KoopaStateStomped
+from typing import List, Type
 
 
 class Koopa(Enemy):
@@ -16,12 +17,13 @@ class Koopa(Enemy):
     velocity: int
     dy: int
     in_shell: bool
+    level: Type["LevelOneOne"]
 
-    def __init__(self, x, y, w, h, spawn_x, color) -> None:
+    def __init__(self, x: float, y: float, w: float, h: float, spawn_x: int, color: List[int], level: Type["LevelOneOne"]) -> None:
         super().__init__(x, y, w, h, color)
         self.all_states = {
             "wait": EnemyStateWait(),
-            "move": EnemyStateMove(),
+            "move": EnemyStateMove(level),
             "fall": EnemyStateFall(),
             "stomped": KoopaStateStomped(),
             "shellMove": KoopaStateShellMove()
