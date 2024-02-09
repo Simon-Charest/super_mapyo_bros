@@ -102,13 +102,13 @@ class Level:
                     entity.add_collision(tile)
                     tile.add_collision(entity)
 
-    def remove_entity(self, entity) -> None:
+    def remove_entity(self, entity: Entity) -> None:
         self.entities.remove(entity)
 
-    def remove_tile(self, tile) -> None:
+    def remove_tile(self, tile: BrickBlock) -> None:
         self.map.remove(tile)
 
-    def add_entity(self, entity) -> None:
+    def add_entity(self, entity: Entity) -> None:
         self.entities.append(entity)
                 
     def get_mario(self) -> Mario:

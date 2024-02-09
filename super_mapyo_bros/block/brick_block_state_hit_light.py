@@ -2,7 +2,7 @@ from super_mapyo_bros.entity import Entity
 
 
 class BrickBlockStateHitLight:
-    def enter_state(self, entity) -> None:
+    def enter_state(self, entity: Entity) -> None:
         self.done = False
         self.startY = entity.y
         self.maxY = entity.y - entity.h/2
@@ -18,5 +18,5 @@ class BrickBlockStateHitLight:
             entity.set_y(self.startY)
             entity.change_state("idle")
 
-    def exit_state(self, entity) -> None:
+    def exit_state(self, entity: Entity) -> None:
         return

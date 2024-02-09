@@ -1,6 +1,7 @@
 from pygame import K_a, K_d, K_LSHIFT, K_SPACE
 from pygame.key import get_pressed
 from super_mapyo_bros.enemy.enemy import Enemy
+from super_mapyo_bros.entity import Entity
 from super_mapyo_bros.state import State
 from super_mapyo_bros.utils import collision_sides, should_fall
 
@@ -11,10 +12,10 @@ class MarioStateMove(State):
     def __init__(self, level) -> None:
         self.level = level
 
-    def enter_state(self, entity) -> None:
+    def enter_state(self, entity: Entity) -> None:
         self.run = False
     
-    def execute(self, entity, delta_time: int) -> None:
+    def execute(self, entity: Entity, delta_time: int) -> None:
         key = get_pressed()
 
         # Check for move off of any platform
@@ -72,6 +73,6 @@ class MarioStateMove(State):
             entity.has_collision = False
             entity.colliding_objects = []
  
-    def exit_state(self, entity) -> None:
+    def exit_state(self, entity: Entity) -> None:
         entity.has_collision = False
         entity.colliding_objects = []

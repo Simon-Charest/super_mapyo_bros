@@ -1,12 +1,14 @@
+from super_mapyo_bros.entity import Entity
+from super_mapyo_bros.mario.mario import Mario
 from super_mapyo_bros.state import State
 from super_mapyo_bros.utils import collision_sides, should_fall
 
 
 class KoopaStateShellMove(State):
-    def enter_state(self, entity) -> None:
+    def enter_state(self, entity: Entity) -> None:
         return
 
-    def execute(self, entity, delta_time: int) -> None:
+    def execute(self, entity: Entity, delta_time: int) -> None:
         if entity.direction == "left":
             entity.translate(-(0.8 * delta_time), 0)
 
@@ -39,5 +41,5 @@ class KoopaStateShellMove(State):
             entity.has_collision = False
             entity.colliding_objects = []
 
-    def exit_state(self, entity) -> None:
+    def exit_state(self, entity: Entity) -> None:
         return

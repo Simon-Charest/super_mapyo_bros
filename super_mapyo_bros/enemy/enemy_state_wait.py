@@ -1,8 +1,9 @@
+from super_mapyo_bros.entity import Entity
 from super_mapyo_bros.state import State
 
 
 class EnemyStateWait(State):
-    def enter_state(self, entity) -> None:
+    def enter_state(self, entity: Entity) -> None:
         return
 
     def execute(self, entity, delta_time: int, x: int = -1) -> None:
@@ -13,5 +14,5 @@ class EnemyStateWait(State):
         if x > -1 and x > entity.spawn_x:
             entity.change_state("move")
 
-    def exit_state(self, entity) -> None:
+    def exit_state(self, entity: Entity) -> None:
         entity.is_spawned = True

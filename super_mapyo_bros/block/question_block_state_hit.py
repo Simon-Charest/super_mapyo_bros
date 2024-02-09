@@ -1,4 +1,5 @@
 from super_mapyo_bros.constants import *
+from super_mapyo_bros.entity import Entity
 from super_mapyo_bros.globals import *
 from super_mapyo_bros.coin.coin import Coin
 from super_mapyo_bros.power_up.mushroom import Mushroom
@@ -11,7 +12,7 @@ class QuestionBlockStateHit(State):
     def __init__(self, level) -> None:
         self.level = level
     
-    def enter_state(self, entity) -> None:
+    def enter_state(self, entity: Entity) -> None:
         entity.color = grey
         
         if not entity.used:
@@ -31,8 +32,8 @@ class QuestionBlockStateHit(State):
                         obj.set_y(entity.y)
                         obj.change_state("spawn")
                     
-    def execute(self, entity, delta_time: int) -> None:
+    def execute(self, entity: Entity, delta_time: int) -> None:
         return
 
-    def exit_state(self, entity) -> None:
+    def exit_state(self, entity: Entity) -> None:
         return

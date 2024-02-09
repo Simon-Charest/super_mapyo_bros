@@ -9,6 +9,14 @@ from super_mapyo_bros.enemy.koopa_state_stomped import KoopaStateStomped
 
 
 class Koopa(Enemy):
+    spawn_x: int
+    is_spawned: bool
+    is_dead: bool
+    is_dead_dead: bool
+    velocity: int
+    dy: int
+    in_shell: bool
+
     def __init__(self, x, y, w, h, spawn_x, color) -> None:
         super().__init__(x, y, w, h, color)
         self.all_states = {
@@ -27,7 +35,7 @@ class Koopa(Enemy):
         self.is_dead_dead = False 
         self.velocity = 0
         self.dy = 0
-        self.inShell = False
+        self.in_shell = False
 
     def update(self, delta_time: int) -> None:
         if not self.is_dead_dead:

@@ -1,10 +1,11 @@
+from super_mapyo_bros.entity import Entity
 from super_mapyo_bros.mario.mario import Mario
 from super_mapyo_bros.state import State
 from super_mapyo_bros.utils import collision_sides
 
 
 class BrickBlockStateIdle(State):
-    def enter_state(self, entity) -> None:
+    def enter_state(self, entity: Entity) -> None:
         return
 
     def execute(self, entity, delta_time: int) -> None:
@@ -19,5 +20,5 @@ class BrickBlockStateIdle(State):
             entity.has_collision = False
             entity.colliding_objects = []
 
-    def exit_state(self, entity) -> None:
+    def exit_state(self, entity: Entity) -> None:
         return

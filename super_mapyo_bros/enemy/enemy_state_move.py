@@ -8,7 +8,7 @@ class EnemyStateMove(State):
     def enter_state(self, entity: Entity) -> None:
         return
 
-    def execute(self, entity, delta_time: int) -> None:
+    def execute(self, entity: Entity, delta_time: int) -> None:
         if entity.direction == "left":
             entity.translate(-(0.1 * delta_time), 0)
 
@@ -41,5 +41,5 @@ class EnemyStateMove(State):
             entity.has_collision = False
             entity.colliding_objects = []
 
-    def exit_state(self, entity) -> None:
+    def exit_state(self, entity: Entity) -> None:
         return

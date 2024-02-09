@@ -1,29 +1,30 @@
 from pygame import Rect
+from super_mapyo_bros.entity import Entity
 from super_mapyo_bros.mario.mario import Mario
 from super_mapyo_bros.state import State
 from super_mapyo_bros.utils import collision_sides
 
 
 class KoopaStateStomped(State):
-    def enter_state(self, entity) -> None:
+    def enter_state(self, entity: Entity) -> None:
         self.time = 0
         self.recoverTime = 5000 # five seconds
 
-        if entity.inShell == False:
+        if entity.in_shell == False:
             entity.y += entity.h/2
             entity.h /= 2
             entity.rect = Rect(entity.x, entity.y, entity.w, entity.h)
 
-        entity.inShell = True
+        entity.in_shell = True
         entity.is_dead = True
 
-    def execute(self, entity, delta_time: int) -> None:
+    def execute(self, entity: Entity, delta_time: int) -> None:
         self.time += delta_time
 
         # Come back out of shell.
         if self.time > self.recoverTime:
             entity.is_dead = False
-            entity.inShell = False
+            entity.in_shell = False
             entity.change_state("move")
             entity.y -= entity.h*2
             entity.h *= 2
@@ -48,5 +49,5 @@ class KoopaStateStomped(State):
             entity.has_collision = False
             entity.colliding_objects = []
 
-    def exit_state(self, entity) -> None:
+    def exit_state(self, entity: Entity) -> None:
         return

@@ -13,8 +13,8 @@ class Goomba(Enemy):
     is_spawned: bool
     is_dead: bool
     is_dead_dead: bool
-    velocity: int = 0
-    dy: int = 0
+    velocity: int
+    dy: int
     
     def __init__(self, x: float, y: float, w: float, h: float, spawn_x: int, color: List[int]) -> None:
         super().__init__(x, y, w, h, color)

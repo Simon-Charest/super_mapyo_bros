@@ -1,15 +1,16 @@
 from pygame.key import get_pressed
 from pygame import K_a, K_d, K_SPACE
 from super_mapyo_bros.enemy.enemy import Enemy
+from super_mapyo_bros.entity import Entity
 from super_mapyo_bros.state import State
 from super_mapyo_bros.utils import collision_sides
 
 
-class MarioStateIdle (State):
-    def enter_state(self, entity) -> None:
+class MarioStateIdle(State):
+    def enter_state(self, entity: Entity) -> None:
         return
 
-    def execute(self, entity, delta_time: int) -> None:
+    def execute(self, entity: Entity, delta_time: int) -> None:
         key = get_pressed()
         
         if key[K_SPACE]:
@@ -32,6 +33,6 @@ class MarioStateIdle (State):
             entity.has_collision = False
             entity.colliding_objects = []
 
-    def exit_state(self, entity) -> None:
+    def exit_state(self, entity: Entity) -> None:
         entity.has_collision = False
         entity.colliding_objects = []

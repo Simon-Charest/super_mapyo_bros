@@ -2,17 +2,18 @@ from pygame.key import get_pressed
 from pygame import K_a, K_d, K_LSHIFT
 from super_mapyo_bros.constants import *
 from super_mapyo_bros.enemy.enemy import Enemy
+from super_mapyo_bros.entity import Entity
 from super_mapyo_bros.globals import *
 from super_mapyo_bros.state import State
 from super_mapyo_bros.utils import collision_sides
 
 
 class MarioStateFall(State):
-    def enter_state(self, entity) -> None:
+    def enter_state(self, entity: Entity) -> None:
         self.dx = 0
         entity.velocity = 0
     
-    def execute(self, entity, delta_time: int) -> None:
+    def execute(self, entity: Entity, delta_time: int) -> None:
         # Check in-air movement.
         key = get_pressed()
         speed = entity.speed
@@ -53,6 +54,6 @@ class MarioStateFall(State):
         entity.velocity += gravity
         entity.translate(self.dx * delta_time, entity.dy * delta_time)
 
-    def exit_state(self, entity) -> None:
+    def exit_state(self, entity: Entity) -> None:
         entity.has_collision = False
         entity.colliding_objects = []
