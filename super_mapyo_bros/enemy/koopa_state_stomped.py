@@ -17,7 +17,7 @@ class KoopaStateStomped(State):
         entity.inShell = True
         entity.is_dead = True
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         self.time += delta_time
 
         # Come back out of shell.
@@ -28,6 +28,7 @@ class KoopaStateStomped(State):
             entity.y -= entity.h*2
             entity.h *= 2
             entity.rect = Rect(entity.x, entity.y, entity.w, entity.h)
+            
             return
 
         # Otherwise check for mario hitting it in some direction.

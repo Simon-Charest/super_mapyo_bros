@@ -9,7 +9,7 @@ class MarioStateIdle (State):
     def enter_state(self, entity) -> None:
         return
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         key = get_pressed()
         
         if key[K_SPACE]:

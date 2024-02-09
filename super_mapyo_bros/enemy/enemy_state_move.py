@@ -1,11 +1,14 @@
+from super_mapyo_bros.entity import Entity
+from super_mapyo_bros.mario.mario import Mario
 from super_mapyo_bros.state import State
+from super_mapyo_bros.utils import collision_sides, should_fall
 
 
 class EnemyStateMove(State):
-    def enter_state(self, entity) -> None:
+    def enter_state(self, entity: Entity) -> None:
         return
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         if entity.direction == "left":
             entity.translate(-(0.1 * delta_time), 0)
 

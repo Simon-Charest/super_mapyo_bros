@@ -5,7 +5,7 @@ class GroundBlockStateIdle(State):
     def enter_state(self, entity) -> None:
         return
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         return
         
     def exit_state(self, entity) -> None:

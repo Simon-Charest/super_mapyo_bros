@@ -31,7 +31,7 @@ class QuestionBlockStateHit(State):
                         obj.set_y(entity.y)
                         obj.change_state("spawn")
                     
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         return
 
     def exit_state(self, entity) -> None:

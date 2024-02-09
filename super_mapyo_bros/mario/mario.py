@@ -24,5 +24,5 @@ class Mario(Entity):
         self.dy = 0
         self.velocity = 0
         
-    def update(self, delta_time) -> None:
+    def update(self, delta_time: int) -> None:
         self.curr_state.execute(self, delta_time)

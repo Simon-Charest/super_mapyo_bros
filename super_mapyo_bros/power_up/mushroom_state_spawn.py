@@ -7,7 +7,7 @@ class MushroomStateSpawn(State):
        entity.active = True
        self.startY = entity.y
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         dy = 0.05 * delta_time
         entity.translate(0, -dy)
 

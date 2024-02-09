@@ -18,5 +18,5 @@ class QuestionBlock(Entity):
         self.contents = contents
         self.used = False
 
-    def update(self, delta_time) -> None:
+    def update(self, delta_time: int) -> None:
         self.curr_state.execute(self, delta_time)

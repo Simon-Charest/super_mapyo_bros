@@ -5,7 +5,7 @@ class EnemyStateWait(State):
     def enter_state(self, entity) -> None:
         return
 
-    def execute(self, entity, delta_time, x: int = -1) -> None:
+    def execute(self, entity, delta_time: int, x: int = -1) -> None:
         """self.level.get_mario().x"""
         
         # Wait until player reaches some X position on the

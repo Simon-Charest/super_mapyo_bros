@@ -7,7 +7,7 @@ class BrickBlockStateIdle(State):
     def enter_state(self, entity) -> None:
         return
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         if entity.has_collision:
             for tile in entity.colliding_objects:
                 sides = collision_sides(entity.rect, tile.rect)

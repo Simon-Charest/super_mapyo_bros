@@ -1,3 +1,5 @@
+from pygame import Surface
+from super_mapyo_bros.camera import Camera
 from super_mapyo_bros.enemy.enemy import Enemy
 from super_mapyo_bros.enemy.enemy_state_fall import EnemyStateFall
 from super_mapyo_bros.enemy.enemy_state_move import EnemyStateMove
@@ -27,10 +29,10 @@ class Koopa(Enemy):
         self.dy = 0
         self.inShell = False
 
-    def update(self, delta_time) -> None:
+    def update(self, delta_time: int) -> None:
         if not self.is_dead_dead:
             self.curr_state.execute(self, delta_time)
 
-    def draw(self, screen, camera) -> None:
+    def draw(self, screen: Surface, camera: Camera) -> None:
         if self.is_spawned and not self.is_dead_dead:
-            super().draw(self)
+            super().draw(screen, camera)

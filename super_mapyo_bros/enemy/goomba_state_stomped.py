@@ -11,7 +11,7 @@ class GoombaStateStomped(State):
         entity.rect = Rect(entity.x, entity.y, entity.w, entity.h)
         entity.is_dead = True
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         self.time += delta_time
 
         # When time is up, switch to any state to remove goomba for good.

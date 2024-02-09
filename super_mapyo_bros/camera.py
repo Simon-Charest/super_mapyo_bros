@@ -10,16 +10,16 @@ class Camera:
     def __init__(self, level: Type["LevelOneOne"], screen_size: List[int]) -> None:
         self.level = level
         self.screen_size = screen_size
-        self.getValues()
+        self.get_values()
         self.x = 0
         self.y = 0
         self.w = screen_size[0]
         self.h = screen_size[1]
 
     def update(self) -> None:
-        self.getValues()
+        self.get_values()
 
-    def getValues(self) -> None:
+    def get_values(self) -> None:
         from super_mapyo_bros.mario.mario import Mario
 
         mario: Mario = self.level.get_mario()

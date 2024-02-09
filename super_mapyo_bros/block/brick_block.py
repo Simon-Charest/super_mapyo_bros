@@ -14,5 +14,5 @@ class BrickBlock(Entity):
         self.prev_state = self.all_states.get("idle")
         self.curr_state = self.prev_state
         
-    def update(self, delta_time) -> None:
+    def update(self, delta_time: int) -> None:
         self.curr_state.execute(self, delta_time)

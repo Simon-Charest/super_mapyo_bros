@@ -2,9 +2,10 @@ from super_mapyo_bros.level.level import Level
 
 
 class LevelOneOne(Level):
-    def __init__(self, fileHandle) -> None:
-        Level.__init__(self, fileHandle)
+    def __init__(self, file_handle) -> None:
+        Level.__init__(self, file_handle)
 
-    def update(self, delta_time) -> None:
+    def update(self, delta_time: int) -> None:
         Level.update(self, delta_time)
+        
         return

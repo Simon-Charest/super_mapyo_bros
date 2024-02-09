@@ -14,7 +14,7 @@ class MushroomStateMove(State):
     def enter_state(self, entity: Entity) -> None:
         return
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         if entity.direction == "left":
             entity.translate(-(0.15 * delta_time), 0)
 

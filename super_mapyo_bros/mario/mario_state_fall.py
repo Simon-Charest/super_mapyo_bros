@@ -12,16 +12,18 @@ class MarioStateFall(State):
         self.dx = 0
         entity.velocity = 0
     
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         # Check in-air movement.
         key = get_pressed()
         speed = entity.speed
 
         if key[K_LSHIFT]:
             speed *= 2
+
         if key[K_a]:
             entity.direction = "left"
             self.dx = -speed
+
         if key[K_d]:
             entity.direction = "right"
             self.dx = speed
@@ -30,13 +32,16 @@ class MarioStateFall(State):
         if entity.has_collision:
             for tile in entity.colliding_objects:
                 sides = collision_sides(entity.rect, tile.rect)
+
                 if sides.bottom:
                     if isinstance(tile, Enemy) and not tile.is_dead:
                         entity.dy = 0
                         entity.velocity = -0.15
+
                     else:
                         entity.set_y(tile.top() - entity.h)
                         entity.change_state("idle")
+                        
                         return
         
         if entity.dy > max_velocity:

@@ -6,7 +6,7 @@ class MushroomStateFall(State):
     def enter_state(self, entity) -> None:
         entity.velocity = 0
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         # Update X
         if entity.direction == "left":
             entity.translate(-(0.15 * delta_time), 0)

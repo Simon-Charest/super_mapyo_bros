@@ -1,3 +1,6 @@
+from super_mapyo_bros.entity import Entity
+
+
 class BrickBlockStateHitLight:
     def enter_state(self, entity) -> None:
         self.done = False
@@ -5,7 +8,7 @@ class BrickBlockStateHitLight:
         self.maxY = entity.y - entity.h/2
         self.step = -0.2
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity: Entity, delta_time: int) -> None:
         entity.set_y(entity.y + self.step * delta_time)
 
         if entity.y <= self.maxY:

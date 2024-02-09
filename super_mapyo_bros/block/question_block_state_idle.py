@@ -6,7 +6,7 @@ class QuestionBlockStateIdle(State):
     def enter_state(self, entity) -> None:
         return
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         if entity.has_collision:
             for tile in entity.colliding_objects:
                 # If Mario jumped up and collided with block.

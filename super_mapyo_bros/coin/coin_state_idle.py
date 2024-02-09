@@ -7,7 +7,7 @@ class CoinStateIdle(State):
         self.timer = 0
         self.delay = 1000
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         self.timer += delta_time
 
         if self.timer > self.delay:

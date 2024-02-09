@@ -14,7 +14,7 @@ class MarioStateJump(State):
         self.startHeight = entity.y
         self.dx = 0
 
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         # Check in-air movement.
         key =   get_pressed()
         speed = entity.speed

@@ -14,7 +14,7 @@ class MarioStateMove(State):
     def enter_state(self, entity) -> None:
         self.run = False
     
-    def execute(self, entity, delta_time) -> None:
+    def execute(self, entity, delta_time: int) -> None:
         key = get_pressed()
 
         # Check for move off of any platform
@@ -44,6 +44,7 @@ class MarioStateMove(State):
 
             else:
                 entity.translate(entity.speed * delta_time, 0)
+                
             entity.direction = "right"
 
         if not key[K_LSHIFT]:
