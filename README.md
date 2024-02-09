@@ -2,10 +2,10 @@
 
 ## Built With
 - [Python](https://www.python.org);
-- [Visual Studio Code](https://code.visualstudio.com).
+- [Visual Studio Code](https://code.visualstudio.com);
 - [venv](https://docs.python.org/library/venv);
 - [pip](https://pip.pypa.io);
-- [Pygame](https://www.pygame.org);
+- [Pygame](https://www.pygame.org).
 
 ## Getting Started
 
@@ -18,23 +18,26 @@ C:
 mkdir C:\source
 cd C:\source
 git clone https://github.com/Simon-Charest/super_mapyo_bros.git
+cd C:\source\super_mapyo_bros
 ```
 4. Open solution with Visual Studio Code;
 5. Create virtual environment:
 ```
-cd C:\source\super_mapyo_bros
 python -m venv .venv
+```
+6. Activate virtual environment:
+```
 .venv\Scripts\Activate.ps1
 ```
-6. Upgrade pip:
+7. Upgrade pip:
 ```
 pip install -U pip
 ```
-7. Install requirements:
+8. Install requirements:
 ```
 pip install -r requirements.txt
 ```
-8. Run solution:
+9. Run solution:
 ```
 python .
 ```
